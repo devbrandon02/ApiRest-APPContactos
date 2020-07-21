@@ -3,16 +3,17 @@ const ContactosModel = require("../models/ContactosModel");
 const Contactos = require("../models/ContactosModel");
 
 exports.getContacts = (req, res) => {
-  let body = req.body;
+  let id = req.params.id;
+  // console.log(req.headers.token)
 
-  if (!body.id) {
+  if (!id) {
     res.status(500).json({
       ok: false,
       err: "El id del usuario es obligatorio",
     });
 
   } else {
-    ContactosModel.find({ Propietario: body.id })
+    ContactosModel.find({ Propietario: id })
       .populate("Propietario")
       .exec((err, ContactosDb) => {
         if (err) {
@@ -51,8 +52,6 @@ exports.saveContacts = (req, res) => {
     Email: body.email,
     Telefono: body.telefono,
   });
-
-  console.log(Contacto);
 
   Contacto.save((err, ContactosDB) => {
     if (err) {

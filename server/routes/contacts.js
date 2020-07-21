@@ -6,7 +6,8 @@ const express = require('express'),
 const contactsControllers = require('../controllers/contactsControllers')
 
 
-Router.get('/api/contacts', contactsControllers.getContacts );
+Router.get('/api/contacts/:id', contactsControllers.getContacts );
+
 Router.post('/api/contacts', contactsControllers.saveContacts )
 
 

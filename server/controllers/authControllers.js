@@ -68,10 +68,16 @@ exports.auth = (req, res) => {
         })
       }
       // CREAMOS EL TOKEN PARA EL USUARIO
+      let usuario = {
+        id: usuarioDB._id,
+        estado : usuarioDB.Estado,
+        email: usuarioDB.Email,
+        Nombre: usuarioDB.Nombre,
+        password: ':)'
+      }
       let token = jwt.sign({
-        usuario: usuarioDB
+        usuario: usuario
       }, 'itachi-es-un-dios', {expiresIn: '12h'})
-
 
       usuarioDB.Password = ':)'
       return res.status(200).json({
